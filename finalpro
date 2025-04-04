@@ -1,0 +1,479 @@
+#include<iostream>
+#include<fstream>
+#include<time.h>
+using namespace std;
+int board[9][9];
+int board2[9][9];
+int board3[9][9];
+int dif = 3;
+void generate(int board[9][9]) {
+	{for (int i = 0; i < 9; i++) {
+		int sw = 0;
+		int temp = rand() % 9 + 1;
+		for (int j = 0; j < i; j++) {
+			if (temp == board[0][j])sw++;
+		}
+		if (!sw) {
+			board[0][i] = temp;
+		}
+		else {
+			i--;
+		}
+	}
+	}
+	{for (int i = 3; i < 9; i++) {
+		board[1][i - 3] = board[0][i];
+	}
+	for (int i = 0; i < 3; i++) {
+		board[1][i + 6] = board[0][i];
+	}
+	}
+	{for (int i = 3; i < 9; i++) {
+		board[2][i - 3] = board[1][i];
+	}
+	for (int i = 0; i < 3; i++) {
+		board[2][i + 6] = board[1][i];
+	}
+	}
+	{int temp[9] = { 4,5,3,7,8,6,1,2,0 };
+	for (int i = 0; i < 9; i++) {
+		board[3][i] = board[2][temp[i]];
+	}}
+	{for (int i = 3; i < 9; i++) {
+		board[4][i - 3] = board[3][i];
+	}
+	for (int i = 0; i < 3; i++) {
+		board[4][i + 6] = board[3][i];
+	}
+	}
+	{for (int i = 3; i < 9; i++) {
+		board[5][i - 3] = board[4][i];
+	}
+	for (int i = 0; i < 3; i++) {
+		board[5][i + 6] = board[4][i];
+	}
+	}
+	{int temp[9] = { 4,5,3,7,8,6,1,2,0 };
+	for (int i = 0; i < 9; i++) {
+		board[6][i] = board[5][temp[i]];
+	}}
+	{for (int i = 3; i < 9; i++) {
+		board[7][i - 3] = board[6][i];
+	}
+	for (int i = 0; i < 3; i++) {
+		board[7][i + 6] = board[6][i];
+	}
+	}
+	{for (int i = 3; i < 9; i++) {
+		board[8][i - 3] = board[7][i];
+	}
+	for (int i = 0; i < 3; i++) {
+		board[8][i + 6] = board[7][i];
+	}
+	}
+}
+void print(int board[9][9], int board3[9][9]) {
+	int o=0, oo=0;
+	system("cls");
+	cout << "\x1B[96m";
+	{cout << char(201);
+	for (int j = 0; j < 2; j++) {
+		for (int i = 0; i < 2; i++) {
+			cout << char(205) << char(205) << char(205) << char(209);
+		}
+		cout << char(205) << char(205) << char(205) << char(203);
+	}
+	for (int i = 0; i < 2; i++) {
+		cout << char(205) << char(205) << char(205) << char(209);
+	}
+	cout << char(205) << char(205) << char(205) << char(187);
+	}
+	cout << endl;
+	for (int z = 0; z < 2; z++) {
+		for (int k = 0; k < 2; k++) {
+			{cout << char(186);
+			for (int j = 0; j < 3; j++) {
+				for (int i = 0; i < 2; i++) {
+					cout << ' ';
+					if (board[o][oo] == 0)cout << " ";
+					else {
+						if (board[o][oo] != board3[o][oo]) {
+							cout << "\x1B[31m\033[0m";
+							cout << board[o][oo];
+							cout << "\x1B[96m";
+						}
+						else {
+							cout << board[o][oo];
+						}
+					}
+					oo++;
+					cout<< ' ' << char(179);
+				}
+				cout << ' ';
+				if (board[o][oo] == 0)cout << " ";
+				else {
+					if (board[o][oo] != board3[o][oo]) {
+						cout << "\x1B[31m\033[0m";
+						cout << board[o][oo];
+						cout << "\x1B[96m";
+					}
+					else {
+						cout << board[o][oo];
+					}
+				}
+				oo++;
+				cout << ' ' << char(186);
+			}}
+			cout << endl;
+			o++;
+			oo = 0;
+			{cout << char(199);
+			for (int j = 0; j < 2; j++) {
+				for (int i = 0; i < 2; i++) {
+					cout << char(196) << char(196) << char(196) << char(197);
+				}
+				cout << char(196) << char(196) << char(196) << char(215);
+			}
+			for (int i = 0; i < 2; i++) {
+				cout << char(196) << char(196) << char(196) << char(197);
+			}
+			cout << char(196) << char(196) << char(196) << char(182);
+			}
+			cout << endl;
+		}
+		{cout << char(186);
+		for (int j = 0; j < 3; j++) {
+			for (int i = 0; i < 2; i++) {
+				cout << ' ';
+				if (board[o][oo] == 0)cout << " ";
+				else {
+					if (board[o][oo] != board3[o][oo]) {
+						cout << "\x1B[31m\033[0m";
+						cout << board[o][oo];
+						cout << "\x1B[96m";
+					}
+					else {
+						cout << board[o][oo];
+					}
+				}
+				oo++;
+				cout << ' ' << char(179);
+			}
+			cout << ' ';
+			if (board[o][oo] == 0)cout << " ";
+			else {
+				if (board[o][oo] != board3[o][oo]) {
+					cout << "\x1B[31m\033[0m";
+					cout << board[o][oo];
+					cout << "\x1B[96m";
+				}
+				else {
+					cout << board[o][oo];
+				}
+			}
+			oo++;
+			cout << ' ' << char(186);
+		}}
+		cout << endl;
+		o++;
+		oo = 0;
+		{cout << char(204);
+		for (int j = 0; j < 2; j++) {
+			for (int i = 0; i < 2; i++) {
+				cout << char(205) << char(205) << char(205) << char(216);
+			}
+			cout << char(205) << char(205) << char(205) << char(206);
+		}
+		for (int i = 0; i < 2; i++) {
+			cout << char(205) << char(205) << char(205) << char(216);
+		}
+		cout << char(205) << char(205) << char(205) << char(185);
+		}
+		cout << endl;
+	}
+	for (int k = 0; k < 2; k++) {
+		{cout << char(186);
+		for (int j = 0; j < 3; j++) {
+			for (int i = 0; i < 2; i++) {
+				cout << ' ';
+				if (board[o][oo] == 0)cout << " ";
+				else {
+					if (board[o][oo] != board3[o][oo]) {
+						cout << "\x1B[31m\033[0m";
+						cout << board[o][oo];
+						cout << "\x1B[96m";
+					}
+					else {
+						cout << board[o][oo];
+					}
+				}
+				oo++;
+				cout << ' ' << char(179);
+			}
+			cout << ' ';
+			if (board[o][oo] == 0)cout << " ";
+			else {
+				if (board[o][oo] != board3[o][oo]) {
+					cout << "\x1B[31m\033[0m";
+					cout << board[o][oo];
+					cout << "\x1B[96m";
+				}
+				else {
+					cout << board[o][oo];
+				}
+			}
+			oo++;
+			cout << ' ' << char(186);
+		}}
+		cout << endl;
+		o++;
+		oo = 0;
+		{cout << char(199);
+		for (int j = 0; j < 2; j++) {
+			for (int i = 0; i < 2; i++) {
+				cout << char(196) << char(196) << char(196) << char(197);
+			}
+			cout << char(196) << char(196) << char(196) << char(215);
+		}
+		for (int i = 0; i < 2; i++) {
+			cout << char(196) << char(196) << char(196) << char(197);
+		}
+		cout << char(196) << char(196) << char(196) << char(182);
+		}
+		cout << endl;
+	}
+	{cout << char(186);
+	for (int j = 0; j < 3; j++) {
+		for (int i = 0; i < 2; i++) {
+			cout << ' ';
+			if (board[o][oo] == 0)cout << " ";
+			else {
+				if (board[o][oo] != board3[o][oo]) {
+					cout << "\x1B[31m\033[0m";
+					cout << board[o][oo];
+					cout << "\x1B[96m";
+				}
+				else {
+					cout << board[o][oo];
+				}
+			}
+			oo++;
+			cout << ' ' << char(179);
+		}
+		cout << ' ';
+		if (board[o][oo] == 0)cout << " ";
+		else {
+			if (board[o][oo] != board3[o][oo]) {
+				cout << "\x1B[31m\033[0m";
+				cout << board[o][oo];
+				cout << "\x1B[96m";
+			}
+			else {
+				cout << board[o][oo];
+			}
+		}
+		oo++;
+		cout << ' ' << char(186);
+	}}
+	cout << endl;
+	o++;
+	oo = 0;
+	{cout << char(200);
+	for (int j = 0; j < 2; j++) {
+		for (int i = 0; i < 2; i++) {
+			cout << char(205) << char(205) << char(205) << char(207);
+		}
+		cout << char(205) << char(205) << char(205) << char(202);
+	}
+	for (int i = 0; i < 2; i++) {
+		cout << char(205) << char(205) << char(205) << char(207);
+	}
+	cout << char(205) << char(205) << char(205) << char(188);
+	}
+	cout << endl;
+}
+void menu() {
+	system("cls");
+	cout << "1 new game\n";
+	cout << "2 load game\n";
+	cout << "3 exit\n";
+}
+void set(int board[9][9], int board2[9][9],int dif) {
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			board2[i][j] = board[i][j];
+		}
+	}
+	if (dif == 1) {
+		int a = 36;
+		int i, j;
+		while (a) {
+			i = rand() % 9;
+			j = rand() % 9;
+			if (board2[i][j] != 0) {
+				board2[i][j] = 0;
+				a--;
+			}
+		}
+	}
+	else if (dif == 2) {
+		int a = 46;
+		int i, j;
+		while (a) {
+			i = rand() % 9;
+			j = rand() % 9;
+			if (board2[i][j] != 0) {
+				board2[i][j] = 0;
+				a--;
+			}
+		}
+	}
+	else {
+		int a = 56;
+		int i, j;
+		while (a) {
+			i = rand() % 9;
+			j = rand() % 9;
+			if (board2[i][j] != 0) {
+				board2[i][j] = 0;
+				a--;
+			}
+		}
+	}
+}
+bool win(int board[9][9], int board2[9][9]) {
+	int sw = 0;
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (board[i][j] == board2[i][j])sw++;
+		}
+	}
+	if (sw == 81)return 1;
+	return 0;
+}
+int main() {
+	srand(time(0));
+	int input = 0;
+	while (1) {
+		menu();
+	    cin >> input;
+		cin >> dif;
+		if (input == 1) {
+			ofstream wfile;
+			wfile.open("file.txt", ios::out);
+			system("cls");
+	        generate(board);
+			set(board, board2,dif);
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					board3[i][j] = board2[i][j];
+				}
+			}
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					wfile << board2[i][j] << endl;
+				}
+			}
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					wfile << board[i][j] << endl;
+				}
+			}
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					wfile << board3[i][j] << endl;
+				}
+			}
+			wfile << dif;
+			wfile.close();
+			print(board2,board3);
+			while (!win(board,board2)) {
+				int i, j;
+				cin >> i >> j;
+				int number;
+				cin >> number;
+				wfile.open("file.txt", ios::out);
+				board2[i][j] = number;
+				print(board2, board3);
+				for (int i = 0; i < 9; i++) {
+					for (int j = 0; j < 9; j++) {
+						wfile << board2[i][j]<<endl;
+					}
+				}
+				for (int i = 0; i < 9; i++) {
+					for (int j = 0; j < 9; j++) {
+						wfile << board[i][j] << endl;
+					}
+				}
+				for (int i = 0; i < 9; i++) {
+					for (int j = 0; j < 9; j++) {
+						wfile << board3[i][j] << endl;
+					}
+				}
+				wfile << dif;
+				wfile.close();
+			}
+		}
+		else if (input == 2) {
+			ifstream rfile;
+			rfile.open("file.txt", ios::in);
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					char a;
+					rfile >> a;
+					board2[i][j] = a - 48;
+				}
+			}
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					char a;
+					rfile >> a;
+					board[i][j] = a - 48;
+				}
+			}
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					char a;
+					rfile >> a;
+					board3[i][j] = a - 48;
+				}
+			}
+			rfile >> dif;
+			dif -= 48;
+			rfile.close();
+			ofstream wfile;
+			wfile.open("file.txt", ios::out);
+			print(board2, board3);
+			while (!win(board, board2)) {
+				int i, j;
+				cin >> i >> j;
+				int number;
+				cin >> number;
+				wfile.open("file.txt", ios::out);
+				board2[i][j] = number;
+				print(board2, board3);
+				for (int i = 0; i < 9; i++) {
+					for (int j = 0; j < 9; j++) {
+						wfile << board2[i][j] << endl;
+					}
+				}
+				for (int i = 0; i < 9; i++) {
+					for (int j = 0; j < 9; j++) {
+						wfile << board[i][j] << endl;
+					}
+				}
+				for (int i = 0; i < 9; i++) {
+					for (int j = 0; j < 9; j++) {
+						wfile << board3[i][j] << endl;
+					}
+				}
+				wfile << dif;
+				wfile.close();
+			}
+		}
+		else {
+			break;
+		}
+	}
+	return 0;
+}
