@@ -471,9 +471,6 @@ int main() {
 				wfile.close();
 			}
 		}
-		else {
-			break;
-		}
-	}
+		
 	return 0;
 }
